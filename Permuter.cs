@@ -6,62 +6,74 @@ using System.Linq;
 public class Permuter
 {
     public List<List<Value>> PermutationList = new List<List<Value>>();
-    List<Value> permutation = new List<Value>();
+
 
 
     // build the array now
     public Permuter()
     {
-        add();
+
+        Add(new List<Value>(), Value.BLANK);
+
         Console.WriteLine(PermutationList.Count);
 
         print();
+    }
+
+
+    public void Add(List<Value> permutation, Value value)
+    {
+
+        if (value != Value.BLANK)
+        {
+            permutation.Add(value);
+        }
+
+        if (permutation.Count > 3)
+        {
+
+
+            if (PermutationList.Contains(permutation))
+            {
+                Environment.Exit(1337);
+            }
+            // clone it into a new list so the original is never modified
+            PermutationList.Add(permutation.ToList());
+            return;
+        }
+
+        // recursive calls if the permutation is not yet length of 4
+        // to build it up
+        Add(permutation.ToList(), Value.Yod);
+        Add(permutation.ToList(), Value.He);
+        Add(permutation.ToList(), Value.Vau);
     }
 
     public void print()
     {
         foreach (List<Value> p in PermutationList)
         {
-            render(p);
+            Console.WriteLine(
+                $"[{f(p[0])},{f(p[1])},{f(p[2])},{f(p[3])}]"
+            );
         }
     }
 
-    public void render(List<Value> p)
+
+
+    public string f(Value value)
     {
-        foreach (Value v in p)
+        switch (value)
         {
-            switch (p)
-            {
-                case Value.Yod:
+            case Value.Yod:
+                return "Y";
+            case Value.He:
+                return "H";
+            case Value.Vau:
+                return "V";
 
-                    return;
-            }
         }
+        throw new Exception();
+        //return "ERROR";
     }
-
-
-
-
-
-    public void add()
-    {
-        if (permutation.Count > 3)
-        {
-            Console.WriteLine("Add to list");
-            // clone it into a new list so the original is never modified
-            PermutationList.Add(permutation.ToList());
-            // snip off the last element?
-            permutation.RemoveAt(permutation.Count - 1);
-
-            return;
-        }
-
-        permutation.Add(Value.Yod);
-        add();
-        permutation.Add(Value.He);
-        add();
-        permutation.Add(Value.Vau);
-        add();
-    }
-
 }
