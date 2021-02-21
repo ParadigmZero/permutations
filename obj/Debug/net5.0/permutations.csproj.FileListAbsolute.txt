@@ -1,0 +1,16 @@
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.exe
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.deps.json
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.runtimeconfig.json
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.runtimeconfig.dev.json
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.dll
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\ref\permutations.dll
+C:\socprojects\Creations\permutations\bin\Debug\net5.0\permutations.pdb
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.csprojAssemblyReference.cache
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.GeneratedMSBuildEditorConfig.editorconfig
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.AssemblyInfoInputs.cache
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.AssemblyInfo.cs
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.csproj.CoreCompileInputs.cache
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.dll
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\ref\permutations.dll
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.pdb
+C:\socprojects\Creations\permutations\obj\Debug\net5.0\permutations.genruntimeconfig.cache
