@@ -7,9 +7,11 @@ namespace permutations
     {
         static void Main(string[] args)
         {
+            Permuter p = new Permuter();
+
             //char[] elements = new char[3] { 'Y', 'H', 'V' }; 
 
-            loopAttempt(); 
+            //loopAttempt(); Console.WriteLine("Hello World!");
         }
 
 
