@@ -4,4 +4,12 @@ public enum Value
     He,
     Vau,
     BLANK
+    ,
+    Fire
+    ,
+    Water
+    ,
+    Air
+    ,
+    Earth
 }
