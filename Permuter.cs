@@ -18,7 +18,7 @@ public class Permuter
 
 
     // could allow, can add duplicates
-    bool uniquePermutations = false;
+    bool unique = true;
 
 
     public List<List<Value>> PermutationList = new List<List<Value>>();
@@ -28,32 +28,35 @@ public class Permuter
     bool createFile = false;
     string fileName = "permutations";
 
+
+    public bool addValue = true;
+
     // build the array now
     public Permuter()
     {
 
-        //         values = new Value[3] {
-        //         Value.Yod,
-        //         Value.He,
-        //         Value.Vau
-        // }; 
-        // yields 81 permutations
+        values = new Value[3] {
+                Value.Yod,
+                Value.He,
+                Value.Vau
+        }; // yields 81 permutations
 
-        values = new Value[4] {
-        Value.Fire,
-        Value.Water,
-        Value.Air,
-        Value.Earth
-}; // yields 256 permutations
+        //         values = new Value[4] {
+        //         Value.Fire,
+        //         Value.Water,
+        //         Value.Air,
+        //         Value.Earth
+        // }; // yields 256 permutations
 
-        values = new Value[1]
-        {
-            Value.Fire
-        };
+        // values = new Value[1]
+        // {
+        //     Value.Fire
+        // }; // yields one permutation as expected
 
         Add(new List<Value>(), Value.BLANK);
 
         Console.WriteLine(PermutationList.Count);
+
 
         print();
     }
@@ -61,6 +64,24 @@ public class Permuter
 
     public void Add(List<Value> permutation, Value value)
     {
+
+        // if not duplicates check its not there already
+
+        // if (unique)
+        // {
+        //     foreach (Value element in permutation)
+        //     {
+        //         Console.WriteLine(f(value) + " != " + f(element));
+        //         // if this element is already in our permutation break out
+        //         if (value.Equals(element))
+        //         {
+        //             Console.WriteLine("duplicate");
+        //             return;
+        //         }
+        //     }
+        // }
+        // if the value has been used already against the existing permutation
+
 
         if (value != Value.BLANK)
         {
@@ -111,7 +132,7 @@ public class Permuter
     }
 
 
-
+    // essentially a Dictionary could just use that
     public string f(Value value)
     {
         switch (value)
