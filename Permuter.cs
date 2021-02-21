@@ -10,76 +10,44 @@ public class Permuter
 {
 
 
-    public Value[] values;
-
-
-
-
-
+    public Value[] Values;
 
     // could allow, can add duplicates
-    bool unique;
-
+    bool Unique;
 
     public List<List<Value>> PermutationList = new List<List<Value>>();
-
-    public string CSV;
-
-    bool createFile;
-    string fileName;
+    bool CreateFile;
+    string FileName;
 
 
 
 
-    int numberOfElements;
+    int NumberOfElements;
+
+    static void Main(string[] args)
+    {
+        Value[] yhvh = new Value[3] { Value.Yod, Value.He, Value.Vau };
+
+        Permuter p = new Permuter(yhvh, 4, false, true, "allYHVH");
+    }
+
 
     // build the array now
-    public Permuter()
+    public Permuter(Value[] values, int numberOfElements, bool unique = false,
+    bool createFile = false, string fileName = "unnamed_permutation")
     {
-        unique = false;
-
-
-
-        createFile = true;
-
-        numberOfElements = 6;
-
-        fileName = "IChing";
-
-        // values = new Value[3] {
-        //         Value.Yod,
-        //         Value.He,
-        //         Value.Vau
-        // }; // yields 81 permutations
-
-        // values = new Value[4] {
-        //         Value.Yod,
-        //         Value.He,
-        //         Value.Vau,
-        //         Value.HeEarth
-        // }; // yields 81 permutations
-
-        // values = new Value[4] {
-        //         Value.Fire,
-        //         Value.Water,
-        //         Value.Air,
-        //         Value.Earth
-        // };
-
-        values = new Value[2] {
-                Value.Yin,
-                Value.Yang
-        };
-
-        // values = new Value[1]
-        // {
-        //     Value.Fire
-        // }; // yields one permutation as expected
+        Values = values;
+        NumberOfElements = numberOfElements;
+        Unique = unique;
+        CreateFile = createFile;
+        FileName = fileName;
 
         if (numberOfElements < values.Length)
         {
             Console.WriteLine
-            ($"Cannot have only unique values in each permutation with {numberOfElements} in only {values.Length} spaces");
+            (
+                @$"Cannot have only unique values in a permutation with {numberOfElements}
+             elements in only { values.Length} spaces.");
             unique = false;
         }
 
@@ -93,7 +61,7 @@ public class Permuter
         // could use a dictionary.
         // if not duplicates check its not there already
 
-        if (unique)
+        if (Unique)
         {
             if (permutation.Contains(value))
             {
@@ -107,7 +75,7 @@ public class Permuter
             permutation.Add(value);
         }
 
-        if (permutation.Count >= numberOfElements)
+        if (permutation.Count >= NumberOfElements)
         {
 
 
@@ -126,7 +94,7 @@ public class Permuter
         // Add(permutation.ToList(), Value.He);
         // Add(permutation.ToList(), Value.Vau);
 
-        foreach (Value v in values)
+        foreach (Value v in Values)
         {
             Add(permutation.ToList(), v);
         }
@@ -160,9 +128,9 @@ public class Permuter
             aux = "";
         }
 
-        if (createFile)
+        if (CreateFile)
         {
-            await File.WriteAllLinesAsync($"{fileName}.csv", perms);
+            await File.WriteAllLinesAsync($"{FileName}.csv", perms);
         }
 
         foreach (string s in perms)
@@ -205,4 +173,6 @@ public class Permuter
 
         //return "ToDo";
     }
+
+
 }
