@@ -3,6 +3,7 @@ public enum Value
     Yod,
     He,
     Vau,
+    HeEarth,
     BLANK
     ,
     Fire
@@ -12,4 +13,8 @@ public enum Value
     Air
     ,
     Earth
+    ,
+    Yin
+    ,
+    Yang
 }

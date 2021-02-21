@@ -18,69 +18,88 @@ public class Permuter
 
 
     // could allow, can add duplicates
-    bool unique = true;
+    bool unique;
 
 
     public List<List<Value>> PermutationList = new List<List<Value>>();
 
     public string CSV;
 
-    bool createFile = false;
-    string fileName = "permutations";
+    bool createFile;
+    string fileName;
 
 
-    public bool addValue = true;
+
+
+    int numberOfElements;
 
     // build the array now
     public Permuter()
     {
+        unique = false;
 
-        values = new Value[3] {
-                Value.Yod,
-                Value.He,
-                Value.Vau
-        }; // yields 81 permutations
 
-        //         values = new Value[4] {
+
+        createFile = true;
+
+        numberOfElements = 6;
+
+        fileName = "IChing";
+
+        // values = new Value[3] {
+        //         Value.Yod,
+        //         Value.He,
+        //         Value.Vau
+        // }; // yields 81 permutations
+
+        // values = new Value[4] {
+        //         Value.Yod,
+        //         Value.He,
+        //         Value.Vau,
+        //         Value.HeEarth
+        // }; // yields 81 permutations
+
+        // values = new Value[4] {
         //         Value.Fire,
         //         Value.Water,
         //         Value.Air,
         //         Value.Earth
-        // }; // yields 256 permutations
+        // };
+
+        values = new Value[2] {
+                Value.Yin,
+                Value.Yang
+        };
 
         // values = new Value[1]
         // {
         //     Value.Fire
         // }; // yields one permutation as expected
 
+        if (numberOfElements < values.Length)
+        {
+            Console.WriteLine
+            ($"Cannot have only unique values in each permutation with {numberOfElements} in only {values.Length} spaces");
+            unique = false;
+        }
+
         Add(new List<Value>(), Value.BLANK);
-
-        Console.WriteLine(PermutationList.Count);
-
-
         print();
     }
 
 
     public void Add(List<Value> permutation, Value value)
     {
-
+        // could use a dictionary.
         // if not duplicates check its not there already
 
-        // if (unique)
-        // {
-        //     foreach (Value element in permutation)
-        //     {
-        //         Console.WriteLine(f(value) + " != " + f(element));
-        //         // if this element is already in our permutation break out
-        //         if (value.Equals(element))
-        //         {
-        //             Console.WriteLine("duplicate");
-        //             return;
-        //         }
-        //     }
-        // }
-        // if the value has been used already against the existing permutation
+        if (unique)
+        {
+            if (permutation.Contains(value))
+            {
+                return;
+            }
+        }
 
 
         if (value != Value.BLANK)
@@ -88,7 +107,7 @@ public class Permuter
             permutation.Add(value);
         }
 
-        if (permutation.Count > 3)
+        if (permutation.Count >= numberOfElements)
         {
 
 
@@ -113,22 +132,45 @@ public class Permuter
         }
     }
 
+    // Print further refines the list
+    // for instance, in YHVH there are two Hehs,
+    // however depending on how they are displayed
+    // we further reduce the permutations
     public async void print()
     {
 
+        List<string> perms = new List<string>();
+        string aux = "";
+
         foreach (List<Value> p in PermutationList)
         {
-            CSV += $"{f(p[0])},{f(p[1])},{f(p[2])},{f(p[3])}\n";
-        }
 
-        Console.WriteLine(CSV);
+            for (int i = 0; i < p.Count; i++)
+            {
+                aux += $"{f(p[i])},";
+            }
+            aux.Trim(',');
+
+            // if the value is not there already add it.
+            if (!perms.Contains(aux))
+            {
+                perms.Add(aux);
+            }
+
+            aux = "";
+        }
 
         if (createFile)
         {
-            await File.WriteAllTextAsync($"{fileName}.csv", CSV);
+            await File.WriteAllLinesAsync($"{fileName}.csv", perms);
         }
 
-        Console.WriteLine(PermutationList.Count);
+        foreach (string s in perms)
+        {
+            Console.WriteLine(s);
+        }
+
+        Console.WriteLine($"{perms.Count} permutations");
     }
 
 
@@ -143,11 +185,24 @@ public class Permuter
                 return "H";
             case Value.Vau:
                 return "V";
-
+            case Value.HeEarth:
+                return "H";
+            case Value.Earth:
+                return "Earth";
+            case Value.Water:
+                return "Water";
+            case Value.Air:
+                return "Air";
+            case Value.Fire:
+                return "Fire";
+            case Value.Yin:
+                return "Yin";
+            case Value.Yang:
+                return "Yang";
         }
         // returns error with any invalid
-        //throw new Exception();
+        throw new Exception();
 
-        return "ToDo";
+        //return "ToDo";
     }
 }
