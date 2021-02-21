@@ -26,9 +26,31 @@ public class Permuter
 
     static void Main(string[] args)
     {
-        Value[] yhvh = new Value[3] { Value.Yod, Value.He, Value.Vau };
+        Permuter p;
 
-        Permuter p = new Permuter(yhvh, 4, false, true, "allYHVH");
+        // allYHVH
+        Value[] yhv = new Value[3] { Value.Yod, Value.He, Value.Vau };
+        p = new Permuter(yhv, 4, false, true, "allYHVH");
+
+        // "unique" YHVH
+        Value[] yhvh = new Value[4] { Value.Yod, Value.He, Value.Vau, Value.HeEarth };
+        p = new Permuter(yhvh, 4, true, true, "twelvetribes");
+
+        // I Ching
+        Value[] yinYang = new Value[2] { Value.Yin, Value.Yang };
+        p = new Permuter(yinYang, 6, false, true, "IChing");
+
+        // Bagua
+        p = new Permuter(yinYang, 3, false, true, "bagua");
+
+        // 16 gates
+        Value[] fourElements = new Value[4] { Value.Earth, Value.Water, Value.Air, Value.Fire };
+        p = new Permuter(fourElements, 2, false, true, "sixteengates");
+
+        // runes
+        p = new Permuter(fourElements, 4, true, true, "runes");
+
+
     }
 
 
@@ -117,8 +139,8 @@ public class Permuter
             {
                 aux += $"{f(p[i])},";
             }
-            aux.Trim(',');
 
+            aux = aux.Substring(0, aux.Length - 1);
             // if the value is not there already add it.
             if (!perms.Contains(aux))
             {
