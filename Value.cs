@@ -17,4 +17,29 @@ public enum Value
     Yin
     ,
     Yang
+    ,
+    Aries
+    ,
+    Taurus
+    ,
+    Gemini
+    ,
+    Cancer
+    ,
+    Leo
+    ,
+    Virgo
+    ,
+    Libra
+    ,
+    Scorpio
+    ,
+    Sagitarius
+    ,
+    Capricorn
+    ,
+    Aquarius
+    ,
+    Pisces
+
 }

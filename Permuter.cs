@@ -6,23 +6,62 @@ using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 
+
+
 public class Permuter
 {
 
 
     public Value[] Values;
 
-    // could allow, can add duplicates
+    // can add duplicates, in which case there could be many more permutations
     bool Unique;
 
     public List<List<Value>> PermutationList = new List<List<Value>>();
     bool CreateFile;
     string FileName;
 
-
-
-
     int NumberOfElements;
+
+    IDictionary<Value, string> printValues = new Dictionary<Value, string>()
+    {
+         {Value.Yod, "Yod"}
+         ,
+         {Value.He, "He"}
+         ,
+         {Value.Vau, "Vau"}
+         ,
+         {Value.HeEarth, "He"}
+         ,
+         {Value.Fire, "Fire"}
+         ,
+         {Value.Water, "Water"}
+         ,
+         {Value.Air, "Air"}
+         ,
+         {Value.Earth, "Earth"}
+         ,
+         {Value.Yin, "Yin"}
+         ,
+         {Value.Yang, "Yang"}
+,
+{Value.Aries, "Aries"}
+,
+
+{Value.Taurus, "Taurus"},
+{Value.Gemini, "Gemini"},
+{Value.Cancer, "Cancer"},
+{Value.Leo, "Leo"},
+{Value.Virgo, "Virgo"},
+{Value.Libra, "Libra"},
+{Value.Scorpio, "Scorpio"},
+{Value.Sagitarius, "Sagitarius"},
+{Value.Capricorn, "Capricorn"},
+{Value.Aquarius, "Aquarius"},
+{Value.Pisces, "Pisces"}
+    };
+
+    Dictionary<Value, string> vau = new Dictionary<Value, string>();
 
     static void Main(string[] args)
     {
@@ -30,11 +69,11 @@ public class Permuter
 
         // allYHVH
         Value[] yhv = new Value[3] { Value.Yod, Value.He, Value.Vau };
-        p = new Permuter(yhv, 4, false, true, "allYHVH");
+        p = new Permuter(yhv, 4, false, true, "allYHVHfullName");
 
         // "unique" YHVH
         Value[] yhvh = new Value[4] { Value.Yod, Value.He, Value.Vau, Value.HeEarth };
-        p = new Permuter(yhvh, 4, true, true, "twelvetribes");
+        p = new Permuter(yhvh, 4, true, true, "twelvetribesfullname");
 
         // I Ching
         Value[] yinYang = new Value[2] { Value.Yin, Value.Yang };
@@ -50,12 +89,17 @@ public class Permuter
         // runes
         p = new Permuter(fourElements, 4, true, true, "runes");
 
+        // possible order of zodiac signs
+        // Value[] zodiac = new Value[12] { Value.Aries, Value.Taurus,Value.Gemini,Value.Cancer,Value.Leo,
+        // Value.Virgo,Value.Libra,Value.Scorpio,Value.Sagitarius, Value.Capricorn, Value.Aquarius, Value.Pisces };
+        // p = new Permuter(zodiac, 12, false, true, "zodiac");
+
 
     }
 
 
     // build the array now
-    public Permuter(Value[] values, int numberOfElements, bool unique = false,
+    public Permuter(Value[] values, int numberOfElements, bool unique = true,
     bool createFile = false, string fileName = "unnamed_permutation")
     {
         Values = values;
@@ -63,6 +107,8 @@ public class Permuter
         Unique = unique;
         CreateFile = createFile;
         FileName = fileName;
+
+
 
         if (numberOfElements < values.Length)
         {
@@ -164,8 +210,12 @@ public class Permuter
     }
 
 
-    // essentially a Dictionary could just use that
+    // don't really need a function
     public string f(Value value)
+    {
+        return printValues[value];
+    }
+    public string f2(Value value)
     {
         switch (value)
         {
